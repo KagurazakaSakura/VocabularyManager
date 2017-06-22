@@ -45,7 +45,3 @@ def get_input():
     return set(input_area.get('1.0', 'end').split())
 
 root.mainloop()
-
-
-
-
