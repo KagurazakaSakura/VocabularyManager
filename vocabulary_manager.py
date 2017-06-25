@@ -9,7 +9,7 @@ import merriam_webster
 # -----main untility----------------
 def submit():
     wordlist = wordlist_generator.get_unknown_words_from(get_input())
-    print("start to process" + str(wordlist))
+    print("Start to process:\n  " + str(wordlist)+"\n")
     template = open("./template.html", "r")
     output = open("./output.html", "w", encoding='utf-8')
 
@@ -19,7 +19,7 @@ def submit():
                 output.write(x)
         else:
             output.write(temp_line)
-    print("work over")
+    print("Dictionary generateed successfully")
     os.startfile(os.path.normpath("./output.html"))
     template.close()
     output.close()
@@ -42,7 +42,7 @@ root.resizable(width=False, height=False)
 # -----functional definition-----------
 
 def get_input():
-    return set(input_area.get('1.0', 'end').split())
+    return list(input_area.get('1.0', 'end').split())
 
 
 root.mainloop()

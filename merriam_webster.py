@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import urllib.request
 import re
-print("webster dictionary start")
+print("Webster dictionary connected")
 def request_xml(word):
     r = urllib.request.urlopen("http://www.dictionaryapi.com/api/v1/references/learners/xml/" + word + "?key=508b6e11-3920-41fe-a57a-d379deacf188").read().decode("utf-8")
-    print("success->"+word)
+    print("√ -> "+word)
     if len(r)<=83:
         return None
     else:
@@ -48,4 +48,4 @@ def get_all_defination(word_list):
                         yield entry
                         break
             else:
-                print("unsuccess: "+word)
+                print("x ->: "+word)
