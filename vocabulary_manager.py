@@ -2,6 +2,7 @@
 from tkinter import *
 from tkinter import ttk
 import os
+import re
 
 #functional import
 import wordlist_generator
@@ -20,7 +21,7 @@ def unique(items):
 
 # -----window init--------------------
 root = Tk()
-root.title("Modern Vocabulary Manager")
+root.title("Modern Vocabulary Manager | version 1.2 (17.2.26)")
 mainframe = ttk.Frame(root)
 mainframe.grid(column=0, row=0)
 
@@ -46,15 +47,12 @@ extert_button.grid(column=0, row=0)
 select_button = ttk.Button(control_panel, text='开始生成')
 select_button.grid(column=0, row=1)
 
-dict_chooser=ttk.Label(control_panel,text="选择字典")
-dict_chooser.grid(column=0,row=2)
-dict_MW=ttk.Radiobutton(control_panel, text='Merrian Webster')
-dict_MW.grid(column=0,row=3)
-
-
+##
+##dict_MW=ttk.Radiobutton(control_panel, text='Merrian Webster')
+##dict_MW.grid(column=0,row=2)
 
 #---------list box------------
-name_list=StringVar(value=list('abcdefghijkmlnopqrstuvwxyz'))
+name_list=StringVar(value=["先在左侧输入单词"])
 wordlist=Listbox(mainframe,height=10,
                      listvariable=name_list,
                      selectmode=MULTIPLE,
@@ -85,8 +83,9 @@ def user_selected_known_words():
 
 
 def submit():
-    print(global_list)
-    word_list=user_selected_known_words()
+    delete_empty=lambda strings:[x for x in strings if x]
+    word_list=delete_empty(user_selected_known_words())
+    
     print("Start to process:\n  " + str(word_list)+"\n")
     template = open("./template.html", "r")
     output = open("./output.html", "w", encoding='utf-8')
@@ -97,7 +96,7 @@ def submit():
                 output.write(x)
         else:
             output.write(temp_line)
-    print("Dictionary generateed successfully")
+    print("\nDictionary generateed successfully")
     os.startfile(os.path.normpath("./output.html"))
     template.close()
     output.close()
@@ -109,10 +108,7 @@ select_button.configure(command=submit)
 #------functional definition-------------
 
 def get_input():
-    return list(input_area.get('1.0', 'end').split())
-
+    return list(re.split(" |,|\n|\.|\?|!",input_area.get('1.0', 'end').replace(u"\u2018", " ").replace(u"\u2019", " ")))
 
 root.resizable(width=False, height=False) 
 root.mainloop()
-
-
