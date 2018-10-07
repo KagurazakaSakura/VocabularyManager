@@ -1,5 +1,5 @@
 # Vocabulary Manager
-使用 GPL3.0 共享协议
+
 # 使用说明：
 
 从最左侧的窗口输入内容
