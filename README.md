@@ -1,3 +1,6 @@
+update feb 15, 2019.
+韦伯词典的免费 API 把 XML 的输出改了格式，paser 已经不能用了。所以要把那部分改成 Json 的paser 才行。
+
 # Vocabulary Manager
 
 # 使用说明：
